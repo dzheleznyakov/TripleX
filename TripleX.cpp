@@ -1,18 +1,18 @@
 #include <iostream>
 
-void PrintIntroduction() 
+void PrintIntroduction(int Difficulty) 
 {
-    std::cout << "\n\nYou are a secret agent breaking into a secure server room...\n";
+    std::cout << "\n\nYou are a secret agent breaking into a level " << Difficulty << " secure server room...\n";
     std::cout << "Enter the correct code to continue...\n" << std::endl;
 }
 
-bool PlayGame()
+bool PlayGame(int Difficulty)
 {
-    PrintIntroduction();
+    PrintIntroduction(Difficulty);
 
-    int CodeA {4};
-    int CodeB {3};
-    int CodeC {2};
+    int CodeA {rand()};
+    int CodeB {rand()};
+    int CodeC {rand()};
     
     int CodeSum {CodeA + CodeB + CodeC};
     int CodeProduct {CodeA * CodeB * CodeC};
@@ -31,25 +31,33 @@ bool PlayGame()
 
     if (GuessSum == CodeSum && GuessProduct == CodeProduct)
     {
-        std::cout << "\nYou win!";
+        std::cout << "\n*** Well done agent! You have extracted a file! Keep going! ***";
         return true;
     }
     else 
     {
-        std::cout << "\nYou lose!";
+        std::cout << "\n*** You entered the wrong code! Careful agent! Try again! ***";
         return false;
     }
 }
 
 int main()
 {
-    while (true)
+    int LevelDifficulty {1};
+    const int MaxDifficulty {5};
+    while (LevelDifficulty <= MaxDifficulty)
     {
-        bool bLevelComplete {PlayGame()};
+        bool bLevelComplete {PlayGame(LevelDifficulty)};
         std::cin.clear();
         std::cin.ignore();
-    }
 
-    std::cout << std::endl << std::endl;
+        if (bLevelComplete)
+        {
+            ++LevelDifficulty;
+        }
+    }
+    std::cout << "\n*** Great work agent! You got all the files! Now get out of there! ***\n";
+
+    std::cout << std::endl;
     return 0;
 }
