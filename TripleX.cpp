@@ -1,9 +1,14 @@
 #include <iostream>
 
-int main()
+void PrintIntroduction() 
 {
-    std::cout << "You are a secret agent breaking into a secure server room..." << std::endl;
-    std::cout << "Enter the correct code to continue..." << std::endl;
+    std::cout << "\n\nYou are a secret agent breaking into a secure server room...\n";
+    std::cout << "Enter the correct code to continue...\n" << std::endl;
+}
+
+bool PlayGame()
+{
+    PrintIntroduction();
 
     int CodeA {4};
     int CodeB {3};
@@ -12,12 +17,11 @@ int main()
     int CodeSum {CodeA + CodeB + CodeC};
     int CodeProduct {CodeA * CodeB * CodeC};
 
-    std::cout << std::endl;
-    std::cout << "+ There are 3 numbers in the code" << std::endl;
-    std::cout << "+ The codes add up to " << CodeSum << std::endl;
-    std::cout << "+ The codes multiply to give " << CodeProduct << std::endl;
+    std::cout << "+ There are 3 numbers in the code";
+    std::cout << "\n+ The codes add up to " << CodeSum;
+    std::cout << "\n+ The codes multiply to give " << CodeProduct << std::endl;
 
-    int GuessA, GuessB, GuessC;
+    int GuessA {}, GuessB {}, GuessC {};
     std::cin >> GuessA;
     std::cin >> GuessB;
     std::cin >> GuessC;
@@ -27,11 +31,23 @@ int main()
 
     if (GuessSum == CodeSum && GuessProduct == CodeProduct)
     {
-        std::cout << "You win!";
+        std::cout << "\nYou win!";
+        return true;
     }
     else 
     {
-        std::cout << "You lose!";
+        std::cout << "\nYou lose!";
+        return false;
+    }
+}
+
+int main()
+{
+    while (true)
+    {
+        bool bLevelComplete {PlayGame()};
+        std::cin.clear();
+        std::cin.ignore();
     }
 
     std::cout << std::endl << std::endl;
